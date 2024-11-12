@@ -5,14 +5,14 @@ import { useParams } from 'react-router-dom';
 import Loader from '../components/Loader.jsx';
 import { api } from '../axios/index.js';
 import { Carousel } from '@material-tailwind/react';
-
+import Comments from "./Comments.jsx"
 const Blog = () => {
     const { slug } = useParams();
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const getBlog = function (req, res) {
-        api.get(`/blogs/${slug}`, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') || '' } })
+        api.get(`/blogs/${slug}`, )
             .then((res) => {
                 console.log(res.data);
                 setBlog(res.data);
@@ -41,7 +41,7 @@ const Blog = () => {
                 <p className="text-gray-600">{blog?.blog}</p>
                 <p className="text-gray-500">Created at: {new Date(blog?.created_at).toLocaleString()}</p>
                 <p className="text-gray-500">Author: {blog?.author?.fullname}</p>
-                
+                <Comments blogId={blog?._id}/>
             </div>
         </div>
     );

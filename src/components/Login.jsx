@@ -17,7 +17,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await api.post('/users/login', data);
+        const response = await api.post('/users/login', data , {withCredentials : true});
         console.log(response.data);
         localStorage.setItem('token', response.data?.token);
         window.location.pathname = '/';
