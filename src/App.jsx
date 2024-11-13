@@ -7,23 +7,22 @@ import Blog from './components/Blog.jsx';
 import Header from './components/Header.jsx';
 import Login from './components/Login.jsx';
 import Users from './components/Users.jsx';
+import AddBlog from "./components/AddPost.jsx"
 import { api } from './axios/index.js';
 export default function App() {
     const navigate = useNavigate();
     const [route, setRoute] = useState(window.location.pathname);
     
     useEffect(() => {
-        api.get('/users/verify', { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') || '' } })
+        api.get('/users/verify' , {withCredentials : true})
         .then((res) => {
             console.log(res.data);
-           
         })
         
     }, [])
     
     useEffect(() => {
         setRoute(window.location.pathname);
-
     }, [navigate]);
 
     return (
@@ -34,6 +33,7 @@ export default function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/blogs" element={<Blogs />} />
+                <Route path="/blogs/add" element={<AddBlog />} />
                 <Route path="/blogs/:slug" element={<Blog />} />
 
                 <Route path="*" element={<h1>Not found</h1>} />

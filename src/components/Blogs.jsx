@@ -5,11 +5,8 @@ import Card from './Card.jsx';
 import { api } from '../axios/index.js';
 import Loader from './Loader.jsx';
 const Blogs = () => {
-
-    
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
-
 
     const getBlogs = function (req, res) {
         api.get('/blogs', { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') || '' } })
@@ -20,6 +17,12 @@ const Blogs = () => {
             .finally(() => setLoading(false));
     };
 
+    const deleteBlog = (id) => {
+        api.delete(`/blogs/${id}`).then((res) => {
+            console.log(res.data);
+            getBlogs(); // Refresh the blogs after deleting one.
+        });
+    };
 
     useEffect(() => {
         getBlogs();
@@ -30,9 +33,10 @@ const Blogs = () => {
     }
 
     return (
-        <div className=' flex  gap-5 px-40'>
+        <div className=" flex  gap-5 px-40 flex-wrap">
             {blogs.map((blog) => (
-                <Card  blog={blog} />
+                
+                <Card deleteBlog={deleteBlog}  blog={blog} />
             ))}
         </div>
     );

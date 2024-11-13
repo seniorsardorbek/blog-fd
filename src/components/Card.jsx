@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-const Card = ({ blog }) => {
+const Card = ({ blog , deleteBlog }) => {
     const { images, title, blog: text, _id, created_at , slug } = blog;
     return (
         <div className="max-w-[300px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -24,6 +24,7 @@ const Card = ({ blog }) => {
                     </svg>
                 </Link>
             </div>
+            <span onClick={(e) => deleteBlog(_id)}>Delete</span>
         </div>
     );
 };
