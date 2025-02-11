@@ -5,14 +5,14 @@ import { useParams } from 'react-router-dom';
 import Loader from '../components/Loader.jsx';
 import { api } from '../axios/index.js';
 import { Carousel } from '@material-tailwind/react';
-import Comments from "./Comments.jsx"
+import Comments from './Comments.jsx';
 const Blog = () => {
     const { slug } = useParams();
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const getBlog = function (req, res) {
-        api.get(`/blogs/${slug}`, )
+        api.get(`/blogs/${slug}`)
             .then((res) => {
                 console.log(res.data);
                 setBlog(res.data);
@@ -38,10 +38,15 @@ const Blog = () => {
 
             <div className="mx-auto w-[90%]">
                 <h1 className="text-2xl font-bold">{blog?.title}</h1>
-                <p className="text-gray-600">{blog?.blog}</p>
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: blog?.blog,
+                    }}
+                    className="text-gray-600"
+                ></p>
                 <p className="text-gray-500">Created at: {new Date(blog?.created_at).toLocaleString()}</p>
                 <p className="text-gray-500">Author: {blog?.author?.fullname}</p>
-                <Comments blogId={blog?._id}/>
+                <Comments blogId={blog?._id} />
             </div>
         </div>
     );

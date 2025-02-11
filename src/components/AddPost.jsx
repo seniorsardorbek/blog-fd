@@ -3,10 +3,15 @@
 import React, { useEffect, useState } from 'react';
 import { Input, Select, Option, Button } from '@material-tailwind/react';
 import { api } from '../axios/index.js';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 const AddPost = () => {
+
     const [data, setData] = useState();
     const [users, setUsers] = useState([]);
     const [image, setImage] = useState([]);
+    const [value, setValue] = useState('');
 
     console.log(users);
     useEffect(() => {
@@ -36,7 +41,7 @@ const AddPost = () => {
         //     console.log(image);
         // });
         formData.append('title', data?.title || '');
-        formData.append('blog', data?.blog || '');
+        formData.append('blog', value || '');
         formData.append('author', data?.author || '');
         const response = await api.post('/blogs', formData, { withCredentials: true, headers: { 'Content-Type': 'multipart/form-data' } });
         console.log(response.data);
@@ -49,7 +54,8 @@ const AddPost = () => {
             <form onSubmit={(e) => handleSubmit(e)} className="w-1/2 mx-auto flex  flex-col gap-5">
                 <h1>Create blog</h1>
                 <Input className="mb-2" required onChange={handleChange} name="title" placeholder="Enter title" label="Enter title" />
-                <Input className="mb-2" required onChange={handleChange} name="blog" placeholder="Enter blog text" label="Enter blog text" />
+                {/* <Input className="mb-2" required onChange={handleChange} name="blog" placeholder="Enter blog text" label="Enter blog text" /> */}
+                <ReactQuill theme="snow" value={value} onChange={setValue} />
                 <select required name="author" onChange={handleChange} label="Select Version">
                     <option>Select author</option>
                     {users.map((user) => (

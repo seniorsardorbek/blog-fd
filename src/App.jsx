@@ -6,6 +6,7 @@ import Blogs from './components/Blogs.jsx';
 import Blog from './components/Blog.jsx';
 import Header from './components/Header.jsx';
 import Login from './components/Login.jsx';
+import Register from './components/Register.jsx';
 import Users from './components/Users.jsx';
 import AddBlog from "./components/AddPost.jsx"
 import { api } from './axios/index.js';
@@ -27,10 +28,11 @@ export default function App() {
 
     return (
         <>
-            {route !== '/login' && <Header />}
+            {(route !== '/login' &&route !== '/register')  && <Header />}
             <Routes>
                 <Route path="/" element={<Blogs />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/blogs" element={<Blogs />} />
                 <Route path="/blogs/add" element={<AddBlog />} />

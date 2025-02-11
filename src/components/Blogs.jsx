@@ -21,6 +21,9 @@ const Blogs = () => {
         api.delete(`/blogs/${id}`).then((res) => {
             console.log(res.data);
             getBlogs(); // Refresh the blogs after deleting one.
+        }).catch((err) =>{
+            console.log(err.data);
+            alert(err.message);
         });
     };
 

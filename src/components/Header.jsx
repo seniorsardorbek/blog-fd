@@ -32,7 +32,7 @@ function Header() {
                     </Typography>
                     <ul className="ml-10 hidden items-center gap-6 lg:flex">
                         <NavItem>
-                        <NavLink className={'flex  items-center'} to={'/blogs'}>
+                            <NavLink className={'flex  items-center'} to={'/blogs'}>
                                 <Squares2X2Icon className="h-5 w-5" />
                                 Blogs
                             </NavLink>
@@ -42,9 +42,9 @@ function Header() {
                             Account
                         </NavItem>
                         <NavItem>
-                            <NavLink className={'flex  items-center'} to={'/users'}>
+                            <NavLink className={'flex  items-center'} to={'/blogs/add'}>
                                 <Squares2X2Icon className="h-5 w-5" />
-                                Users
+                                Blogs Add
                             </NavLink>
                         </NavItem>
                         <NavItem>
@@ -56,7 +56,9 @@ function Header() {
                         <Button variant="text">
                             <Link to={'/login'}> Log in</Link>
                         </Button>
-                        <Button color="gray">buy now</Button>
+                        <Button color="gray">
+                            <Link to={'/register'}>Register</Link>
+                        </Button>
                     </div>
                     <IconButton variant="text" color="gray" onClick={handleOpen} className="ml-auto inline-block lg:hidden">
                         {open ? <XMarkIcon strokeWidth={2} className="h-6 w-6" /> : <Bars3Icon strokeWidth={2} className="h-6 w-6" />}
@@ -66,8 +68,10 @@ function Header() {
                     <div className="container mx-auto mt-3 border-t border-blue-gray-50 px-2 pt-4">
                         <ul className="flex flex-col gap-4">
                             <NavItem>
-                                <RectangleStackIcon className="h-5 w-5" />
-                                Pages
+                                <NavLink className={'flex  items-center'} to={'/blogs'}>
+                                    <Squares2X2Icon className="h-5 w-5" />
+                                    Blogs
+                                </NavLink>
                             </NavItem>
                             <NavItem>
                                 <UserCircleIcon className="h-5 w-5" />
@@ -89,7 +93,6 @@ function Header() {
                     </div>
                 </Collapse>
             </Navbar>
-           
         </>
     );
 }
